@@ -67,16 +67,16 @@ def make_comments_list(filter_country, comments_file_name):
     comment_list = []
     with open(comments_file_name, 'r') as file:
         for line in file:
-            # Parse comment data
+            # Parse comment data and strip any whitespace
             comment_id, username, country, text = line.strip().split(',', 3)
 
             # Filter by country (case insensitive)
             if filter_country == 'all' or country.lower() == filter_country.lower():
                 comment_dict = {
-                    'comment_id': int(comment_id),
-                    'username': username,
-                    'country': country,
-                    'text': text
+                    'comment_id': int(comment_id),  # Convert to interger
+                    'username': username.strip(),           # Remove any whitespace
+                    'country': country.strip(),             # Remove any whitespace
+                    'text': text.strip()                    # Remove leading/trailing whitespace
                 }
                 comment_list.append(comment_dict)
 
